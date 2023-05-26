@@ -14,7 +14,6 @@ components:
         - name: GOCACHE
           value: /tmp/.cache
       memoryLimit: 4Gi
-      cpuLimit: 1
       cpuRequest: 500m
       memoryRequest: 1Gi
       mountSources: true
