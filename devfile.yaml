@@ -1,0 +1,83 @@
+schemaVersion: 2.2.0
+metadata:
+  name: golang-test
+components:
+  - name: home
+    volume:
+      size: 1Gi
+  - name: tools
+    container:
+      image: quay.io/webcenter/developer-image:golang-ubi9-latest
+      env:
+        - name: GOPATH
+          value: /projects:/home/user/go
+        - name: GOCACHE
+          value: /tmp/.cache
+      memoryLimit: 4Gi
+      cpuLimit: 1
+      cpuRequest: 500m
+      memoryRequest: 1Gi
+      mountSources: true
+      volumeMounts:
+        - name: home
+          path: /profile
+  - name: test
+    kubernetes:
+      deployByDefault: true
+      inlined: |
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: test-pod
+          labels:
+            test: test-app
+        spec:
+          containers:
+          - name: test-container
+            image: quay.io/wto/web-terminal-tooling:next
+            resources:
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+            ports:
+              - containerPort: 8080
+            command:
+              - "tail"
+              - "-f"
+              - "/dev/null"
+
+commands:
+  - id: run
+    exec:
+      label: "1.1 Run"
+      component: tools
+      workingDir: ${PROJECT_SOURCE}/
+      commandLine: "go run ."
+      group:
+        kind: run
+
+  - id: stop
+    exec:
+      label: "1.2 Stop"
+      component: tools
+      commandLine: "kill $(pidof go)"
+      group:
+        kind: run
+
+  - id: test
+    exec:
+      label: "1.3 Test"
+      component: tools
+      workingDir: ${PROJECT_SOURCE}/
+      commandLine: "go test -v"
+      group:
+        kind: test
+
+  - id: run-current-file
+    exec:
+      label: "Run current file"
+      component: tools
+      workingDir: ${fileDirname}
+      commandLine: "go run ${file}"
+      group:
+        kind: run
