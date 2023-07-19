@@ -7,7 +7,7 @@ components:
       image: quay.io/webcenter/developer-image:golang-ubi9-latest
       volumeMounts:
         - name: tmp
-          path: /tmp/m2
+          path: /home/user/my-tmp
   - name: tmp
     volume: 
       size: 3Gi
