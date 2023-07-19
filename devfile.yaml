@@ -6,8 +6,8 @@ components:
     container:
       image: quay.io/webcenter/developer-image:golang-ubi9-latest
       volumeMounts:
-        - name: tmp
-          path: /home/user/my-tmp
-  - name: tmp
-    volume: 
-      size: 3Gi
+        - name: cache
+          path: /.cache
+  - name: cache
+    volume:
+      size: 2Gi
