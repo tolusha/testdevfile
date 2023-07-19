@@ -2,31 +2,11 @@ schemaVersion: 2.2.0
 metadata:
   name: golang-test
 components:
-  - name: home
-    volume:
-      size: 1Gi
   - name: tools
     container:
       image: quay.io/webcenter/developer-image:golang-ubi9-latest
-      env:
-        - name: GOPATH
-          value: /projects:/home/user/go
-        - name: GOCACHE
-          value: /tmp/.cache
-      memoryLimit: 4Gi
-      cpuLimit: 1000m
-      cpuRequest: 500m
-      memoryRequest: 1Gi
-      mountSources: true
-      endpoints:
-      - name: intellij
-        attributes:
-          type: main
-        cookiesAuthEnabled: true
-        urlRewriteSupported: true
-        discoverable: false
-        path: /?backgroundColor=434343&wss
-      targetPort: 8887
-      exposure: public
-      secure: false
-      protocol: https
+      volumeMounts:
+        - name: tmp
+          path: /tmp/m2
+  - name: tmp
+    volume: 3Gi
