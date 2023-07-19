@@ -9,4 +9,5 @@ components:
         - name: tmp
           path: /tmp/m2
   - name: tmp
-    volume: 3Gi
+    volume: 
+      size: 3Gi
