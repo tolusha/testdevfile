@@ -31,6 +31,7 @@ components:
           name: docker-certs
           labels:
             controller.devfile.io/mount-to-devworkspace: "true"
+          annotations:
             controller.devfile.io/mount-path: "/home/user/.config/containers/certs.d"
             controller.devfile.io/mount-as: "subpath"
         data:
