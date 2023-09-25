@@ -23,7 +23,7 @@ components:
     name: universal-developer-image
   - name: certs
     kubernetes:
-      inlined:
+      inlined: |
         apiVersion: v1
         kind: ConfigMap
         metadata:
