@@ -32,10 +32,10 @@ components:
           labels:
             controller.devfile.io/mount-to-devworkspace: "true"
           annotations:
-            controller.devfile.io/mount-path: "/etc/containers/certd.d"
+            controller.devfile.io/mount-path: "/etc/containers/certd.d/docker.192.168.39.186.nip.io"
             controller.devfile.io/mount-as: "subpath"
         data:
-          docker-ca.crt: |
+          ca.crt: |
             -----BEGIN CERTIFICATE-----
             MIIDlTCCAzugAwIBAgIRANpKMRnAFyPRMJTg5hOcFGAwCgYIKoZIzj0EAwIwHzEd
             MBsGA1UEAxMUZG9ja2VyLXNlbGZzaWduZWQtY2EwHhcNMjMwOTI1MTAxNjM4WhcN
