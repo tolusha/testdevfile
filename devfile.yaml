@@ -21,7 +21,7 @@ components:
       image: quay.io/devfile/universal-developer-image:ubi8-latest
       sourceMapping: /projects
     name: universal-developer-image
-  - name: certs
+  - name: docker-certs
     kubernetes:
       deployByDefault: true
       inlined: |
@@ -29,26 +29,27 @@ components:
         kind: ConfigMap
         metadata:
           name: docker-certs
-        data: |
-          -----BEGIN CERTIFICATE-----
-          MIIDlTCCAzugAwIBAgIRANpKMRnAFyPRMJTg5hOcFGAwCgYIKoZIzj0EAwIwHzEd
-          MBsGA1UEAxMUZG9ja2VyLXNlbGZzaWduZWQtY2EwHhcNMjMwOTI1MTAxNjM4WhcN
-          MjMxMjI0MTAxNjM4WjAtMRowGAYDVQQKExFMb2NhbCBFY2xpcHNlIENoZTEPMA0G
-          A1UEAxMGZG9ja2VyMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAlJO4
-          gjFdTxc5pAlIqlYpMQ2CJD4pt+yUNr1XI0mYopbPVBoRrprcZDlWpcrXZDnwKzTZ
-          d8+PaQmVDrtgTOWTgIWPLUamFYu1dpSGg/pgQSlsmnYWbpErkta1+wHrA0f517lQ
-          wF6cWiBxHy8VoZvTm01Km4z1ReBLBfFHC4OP49VFpfduH+C5u9FJM3+Nel2rYrDd
-          PJXgel0mPIF0YDqAG4ZpGztJDDJfWc/U1IeRDwfro+UvAfaJaXS8QrQfKhjep+JI
-          N9/xeXxZSeqXoosBk2uCP95Zfai9bCHHfzOQ6Eu3wfnDdXLbcB8C+hDBTZAX8PEW
-          fq8m74CpQOiNU+XN/heVMSKsKpNh5lcYO6YaAoIhS0AXAciommFW8r4H9joEMwKz
-          MxQ+bzi8c1ABCbE/2Pld1p2PgffCmdiX3+Sk8N55nxtq9Cc8P1HSPoOaCJyaqmQB
-          +UGvyPNPHxcgfNqGFshmDqfCPP//q5+KSfcWkNL9L7e3TRY06Iiiv6gr4YYsCBOq
-          7+0CxpORykbEHuhSYDbVaXuHr+4B9K7YIebTggq2KsMen6eQHdeYmbsCwjhDPhW+
-          iY3XMdomgMru7OWu4m4vJcgMtQeIZOHVmUxUzu8OEvr4UhE7UdUen/ztMiP3+Idc
-          qI6jOZduqxmn5DWy3tzJSHK2I/CyRut/JJBX/W8CAwEAAaN/MH0wDgYDVR0PAQH/
-          BAQDAgO4MBMGA1UdJQQMMAoGCCsGAQUFBwMBMAwGA1UdEwEB/wQCMAAwHwYDVR0j
-          BBgwFoAU5FdaT+GLBox6IU8PkOhQDLT9Ht0wJwYDVR0RBCAwHoIcZG9ja2VyLjE5
-          Mi4xNjguMzkuMTg2Lm5pcC5pbzAKBggqhkjOPQQDAgNIADBFAiBC/4bzWLe4CCqj
-          z1DCeWNkhwc6j3ZI+lGRq5l0l561QgIhAIxHYW4jGw7K9IhC+Tlz9p7Mmf9G0jFW
-          z+/l3u6ae/vM
-          -----END CERTIFICATE-----      
+        data:
+          ca.crt: |
+            -----BEGIN CERTIFICATE-----
+            MIIDlTCCAzugAwIBAgIRANpKMRnAFyPRMJTg5hOcFGAwCgYIKoZIzj0EAwIwHzEd
+            MBsGA1UEAxMUZG9ja2VyLXNlbGZzaWduZWQtY2EwHhcNMjMwOTI1MTAxNjM4WhcN
+            MjMxMjI0MTAxNjM4WjAtMRowGAYDVQQKExFMb2NhbCBFY2xpcHNlIENoZTEPMA0G
+            A1UEAxMGZG9ja2VyMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAlJO4
+            gjFdTxc5pAlIqlYpMQ2CJD4pt+yUNr1XI0mYopbPVBoRrprcZDlWpcrXZDnwKzTZ
+            d8+PaQmVDrtgTOWTgIWPLUamFYu1dpSGg/pgQSlsmnYWbpErkta1+wHrA0f517lQ
+            wF6cWiBxHy8VoZvTm01Km4z1ReBLBfFHC4OP49VFpfduH+C5u9FJM3+Nel2rYrDd
+            PJXgel0mPIF0YDqAG4ZpGztJDDJfWc/U1IeRDwfro+UvAfaJaXS8QrQfKhjep+JI
+            N9/xeXxZSeqXoosBk2uCP95Zfai9bCHHfzOQ6Eu3wfnDdXLbcB8C+hDBTZAX8PEW
+            fq8m74CpQOiNU+XN/heVMSKsKpNh5lcYO6YaAoIhS0AXAciommFW8r4H9joEMwKz
+            MxQ+bzi8c1ABCbE/2Pld1p2PgffCmdiX3+Sk8N55nxtq9Cc8P1HSPoOaCJyaqmQB
+            +UGvyPNPHxcgfNqGFshmDqfCPP//q5+KSfcWkNL9L7e3TRY06Iiiv6gr4YYsCBOq
+            7+0CxpORykbEHuhSYDbVaXuHr+4B9K7YIebTggq2KsMen6eQHdeYmbsCwjhDPhW+
+            iY3XMdomgMru7OWu4m4vJcgMtQeIZOHVmUxUzu8OEvr4UhE7UdUen/ztMiP3+Idc
+            qI6jOZduqxmn5DWy3tzJSHK2I/CyRut/JJBX/W8CAwEAAaN/MH0wDgYDVR0PAQH/
+            BAQDAgO4MBMGA1UdJQQMMAoGCCsGAQUFBwMBMAwGA1UdEwEB/wQCMAAwHwYDVR0j
+            BBgwFoAU5FdaT+GLBox6IU8PkOhQDLT9Ht0wJwYDVR0RBCAwHoIcZG9ja2VyLjE5
+            Mi4xNjguMzkuMTg2Lm5pcC5pbzAKBggqhkjOPQQDAgNIADBFAiBC/4bzWLe4CCqj
+            z1DCeWNkhwc6j3ZI+lGRq5l0l561QgIhAIxHYW4jGw7K9IhC+Tlz9p7Mmf9G0jFW
+            z+/l3u6ae/vM
+            -----END CERTIFICATE-----      
