@@ -1,6 +1,14 @@
-schemaVersion: 2.2.2
+schemaVersion: 2.2.0
 metadata:
-  name: devfile
+  name: test
+starterProjects:
+  - name: go-starter
+    description: A Go project with a simple HTTP server
+    git:
+      checkoutFrom:
+        revision: main
+      remotes:
+        origin: https://github.com/devfile-samples/devfile-stack-go.git
 components:
   - name: tools
     container:
@@ -8,11 +16,14 @@ components:
       command: ['sleep', 'infinity']
       mountSources: true
 commands:
-  - id: exec-command
+  - id: build
     exec:
+      group:
+        isDefault: true
+        kind: build
       component: tools
       commandLine: echo "MY_ENV_VAR=$MY_ENV_VAR"
-      workingDir: /projects
+      workingDir: ${PROJECT_SOURCE}
       env:
         - name: MY_ENV_VAR
           value: "my-value"
